@@ -1,1 +1,3 @@
-"# Application de Gestion de la bourse aux livres de l'AAPE" 
+# Application de Gestion de la Bourse aux Livres (GeBouL)
+
+Le but de ce projet est développer une application permettant de gérer la bourse aux livres d'occasion faites par l'Association Autonome des Parents d'Elèves (AAPE) du lycée des graves à Gradignan.  Cette bourse propose à environ 350 adhérents de reprendre et de revendre les livres des élèves du lycée. Bien sûr elle permet aussi aux familles de racheter des livres d'occasion.  L'application doit permettre entre autres choses de gérer les adhésions, le stock de livres (plusieurs milliers répertoriés en fonction de leur état de vétusté), les commandes, les factures et les mailings sachant que les utilisateurs ne sont pas informaticiens.
