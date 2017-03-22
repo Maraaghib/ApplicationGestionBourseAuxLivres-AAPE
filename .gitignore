@@ -1,10 +1,10 @@
-bin/*.class
+*.class
 
 # Databases
-batabase/*.db
+database/*.db
 
 # Config files
-batabase/*.ini
+database/*.ini
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
