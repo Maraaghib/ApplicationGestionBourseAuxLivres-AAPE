@@ -1,10 +1,10 @@
 *.class
 
 # Databases
-database/*.db
+#database/*.db
 
 # Config files
-database/*.ini
+#database/*.ini
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
