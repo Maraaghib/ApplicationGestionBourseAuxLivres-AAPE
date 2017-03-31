@@ -2,7 +2,7 @@
 Sous Windows:
 	Pour compiler,
 	javac TestDataBase.java
-	Pour exécuter,
+	Pour exÃ©cuter,
 	java -classpath ".;sqlite-jdbc-3.16.1.jar" TestDataBase
 */
 
@@ -95,6 +95,6 @@ public class TestDataBase {
 			System.err.println(e.getClass().getName() +  ": " + e.getMessage());
 			System.exit(0);
 		}
-		System.out.println("Insertion effectuée avec succès !");
+		System.out.println("Insertion effectuï¿½e avec succï¿½s !");
 	}
 }
