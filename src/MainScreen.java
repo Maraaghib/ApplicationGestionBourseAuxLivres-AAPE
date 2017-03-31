@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class MainScreen extends JFrame {
 	/**
-	 * 
+	 * Test
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
