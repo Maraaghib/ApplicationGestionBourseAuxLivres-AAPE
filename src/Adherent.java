@@ -40,7 +40,7 @@ public class Adherent {
 		return idAdherent;
 	}
 	
-	private void setIdAdherent(long idAdherent) {
+	public void setIdAdherent(long idAdherent) {
 		this.idAdherent = idAdherent;
 	}
 	
