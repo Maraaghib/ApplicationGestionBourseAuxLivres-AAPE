@@ -1,5 +1,5 @@
 public class Livre {
-	private long Id;
+	private long id;
 	private double prix;
 	private int etat;
 	private long reference;
@@ -9,52 +9,57 @@ public class Livre {
 	public Livre(){
 		
 	}
-	public Livre (long Id,double prix, int etat,long reference , boolean enStock){
-		this.Id=Id;
-		this.prix=prix;
-		this.etat=etat;
-		this.reference=reference;
-		this.enStock=enStock;
+	public Livre (long id, double prix, int etat, long reference, boolean enStock){
+		this.id = id;
+		this.prix = prix;
+		this.etat = etat;
+		this.reference = reference;
+		this.enStock = enStock;
 	}
 
-	/** Controllers **/
-	public long getId(){
-		return Id;
+	/** Setteurs et getteurs **/
+	public long getId() {
+		return id;
 	}
-	public int getEtat(){
-		return this.etat;
-	}
-	public double getPrix(){
-		return this.prix;
-	}
-	public boolean getEnStock(){
-		return enStock;
-	}
-	public long getReference(){
-		return this.reference;
-	}
-	public void setId(long Id){
-		this.Id=Id;
-	}
-	public void setPrix(double prix){
-		this.prix=prix;
-	}	
-	public void setEtat(int etat){
-		this.etat=etat;
-	}
-	public void setReference(long reference){
-		this.reference=reference;
-	}
-	public void setEnStock(boolean enStock){
-		this.enStock=enStock;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
+	public double getPrix() {
+		return prix;
+	}
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+	
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
+	
+	public long getReference() {
+		return reference;
+	}
+	public void setReference(long reference) {
+		this.reference = reference;
+	}
+	
+	public boolean getEnStock() {
+		return enStock;
+	}
+	public void setEnStock(boolean enStock) {
+		this.enStock = enStock;
+	}
+	
+	
 	public Livre clone(){
-		return new Livre(this.Id,this.prix,this.etat,this.reference,this.enStock);
+		return new Livre(this.id, this.prix, this.etat, this.reference, this.enStock);
 	}
 	
 	public boolean equals(Livre bis){
-		return this.getPrix()==bis.getPrix()&&this.getEtat()==bis.getEtat()&&this.getReference()==this.getReference()&&this.getEnStock()==bis.getEnStock();
+		return this.getPrix() == bis.getPrix() && this.getEtat() == bis.getEtat() && this.getReference() == this.getReference() && this.getEnStock() == bis.getEnStock();
 	}
 	
 	public String toString(){
