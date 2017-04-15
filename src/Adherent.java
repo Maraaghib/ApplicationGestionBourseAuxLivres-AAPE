@@ -1,22 +1,25 @@
 import java.util.ArrayList;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-public class Adherant {
+@DatabaseTable(tableName = "adherent")
+public class Adherent {
 	
 	private long id;
-	private long idAdherent;
-	private String prenom;
-	private String nom;
-	private String telephone;
-	private String adresse;
-	private String mail ;
+	@DatabaseField(id = true) private long idAdherent;	
+	@DatabaseField private String prenom;
+	@DatabaseField private String nom;
+	@DatabaseField private String telephone;
+	@DatabaseField private String adresse;
+	@DatabaseField private String mail ;
 	private ArrayList<Commande> listeCommande;
 	
 	/**Constructors**/
-	public Adherant(){
+	public Adherent(){
 		
 	}
 	
-	public Adherant(long id, long idAdherent, String prenom, String nom, String telephone, String adresse, String mail, ArrayList<Commande> listeCommande ) {
+	public Adherent(long id, long idAdherent, String prenom, String nom, String telephone, String adresse, String mail, ArrayList<Commande> listeCommande ) {
 		this.id = id;
 		this.idAdherent = idAdherent;
 		this.prenom = prenom;

@@ -1,9 +1,14 @@
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "livre")
 public class Livre {
-	private long id;
-	private double prix;
-	private int etat;
-	private long reference;
-	private boolean enStock;
+	
+	@DatabaseField(id = true) private long id;
+	@DatabaseField private double prix;
+	@DatabaseField private int etat;
+	@DatabaseField private long reference;
+	@DatabaseField private boolean enStock;
 	
 	/** Constructor **/
 	public Livre(){

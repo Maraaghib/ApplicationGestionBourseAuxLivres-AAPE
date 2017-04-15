@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "adherant")
 public class Commande {
-	private long id;
-	private int classe;
-	private boolean veuxUneCalculatrice;
+	@DatabaseField(id = true) private long id;
+	@DatabaseField private int classe;
+	@DatabaseField private boolean veuxUneCalculatrice;
 	private ArrayList<Livre> listeLivre = new ArrayList<Livre>();
 	
 	/**Constructor*/
@@ -18,7 +21,7 @@ public class Commande {
 		this.listeLivre = liste;
 	}
 	
-	/**Controllers**/
+	/** Getteurs et setteurs **/
 	public long getId() {
 		return id;
 	}
