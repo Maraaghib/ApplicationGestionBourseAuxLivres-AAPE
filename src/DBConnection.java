@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.sql.*;
 import org.ini4j.*;
 
+/* Un singleton pour éviter la duplication de l'instance */
 public class DBConnection {
 
 		private String dbDriver = null;
@@ -12,11 +13,12 @@ public class DBConnection {
 		
 		
 
-		// Constructeur privé
+		/* Constructeur privé pour interdire son appel et forcer à passer par la méthode getDBConnection */
 		private DBConnection(){
 			try{
 				/* Charger le fichier de configuration de la base de données */
 				ini = new Wini(new File("database/config.ini"));
+				
 				/* Extraire les infos de la base de données */
 				dbDriver = ini.get("dataBase", "dbDriver");
 				dbName = ini.get("dataBase", "dbName");
@@ -37,7 +39,8 @@ public class DBConnection {
 				System.exit(0);
 			}
 		}
-
+		
+		/* Méthode qui va retourner l'instance de la connexion et la créer si elle n'existe pas */
 		public static Connection getDBConnection(){
 			if(connection == null){
 				new DBConnection();
@@ -48,6 +51,11 @@ public class DBConnection {
 			}
 
 			return connection;
+		}
+		
+		/* Retourne le chemin de la base de données qui sera utuilsé par ORMLite */
+		public String getDatabaseUrl() {
+			return this.dbName;
 		}
 
 }
