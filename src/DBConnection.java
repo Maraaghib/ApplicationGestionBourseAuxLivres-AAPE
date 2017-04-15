@@ -7,7 +7,7 @@ import org.ini4j.*;
 public class DBConnection {
 
 		private String dbDriver = null;
-		private String dbName = null;
+		private static String dbName = null;
 		private static Connection connection;
 		private Wini ini;
 		
@@ -54,8 +54,8 @@ public class DBConnection {
 		}
 		
 		/* Retourne le chemin de la base de données qui sera utuilsé par ORMLite */
-		public String getDatabaseUrl() {
-			return this.dbName;
+		public static String getDatabaseUrl() {
+			return dbName;
 		}
 
 }
