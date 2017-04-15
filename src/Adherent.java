@@ -40,6 +40,10 @@ public class Adherent {
 		return idAdherent;
 	}
 	
+	private void setIdAdherent(long idAdherent) {
+		this.idAdherent = idAdherent;
+	}
+	
 	public String getPrenom() {
 		return prenom;
 	}
