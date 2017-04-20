@@ -1,95 +1,86 @@
 import java.util.ArrayList;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "adherant")
 public class Commande {
-	@DatabaseField(id = true) private long id;
-	@DatabaseField private int classe;
-	@DatabaseField private boolean veuxUneCalculatrice;
-	private ArrayList<Livre> listeLivre = new ArrayList<Livre>();
+	private long idCommande;
+	private String dateCommande;
+	public double prixCommande;
+	private long idAdherent;
+	private int[] idLivre;
 	
 	/**Constructor*/
 	public Commande(){
 		
 	}
-	
-	public Commande(long id, int classe, boolean veuxUneCalculatrice, ArrayList<Livre> liste){
-		this.id = id;
-		this.classe = classe;
-		this.veuxUneCalculatrice = veuxUneCalculatrice;
-		this.listeLivre = liste;
-	}
-	
-	/** Getteurs et setteurs **/
-	public long getId() {
-		return id;
+
+	public Commande(String dateCommande, double prixCommande, long idAdherent, int[] idLivre) {
+		this.dateCommande = dateCommande;
+		this.prixCommande = prixCommande;
+		this.idAdherent = idAdherent;
+		this.idLivre = idLivre;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public long getIdCommande() {
+		return idCommande;
 	}
 
-	public int getClasse() {
-		return classe;
+	public void setIdCommande(long idCommande) {
+		this.idCommande = idCommande;
 	}
 
-	public void setClasse(int classe) {
-		this.classe = classe;
+	public String getDateCommande() {
+		return dateCommande;
 	}
 
-	public boolean getVeuxUneCalculatrice() {
-		return veuxUneCalculatrice;
+	public void setDateCommande(String dateCommande) {
+		this.dateCommande = dateCommande;
 	}
 
-	public void setVeuxUneCalculatrice(boolean veuxUneCalculatrice) {
-		this.veuxUneCalculatrice = veuxUneCalculatrice;
+	public void setPrixCommande(double prixCommande) {
+		this.prixCommande = prixCommande;
 	}
 
-	public ArrayList<Livre> getListeLivre() {
-		return listeLivre;
+	public long getIdAdherent() {
+		return idAdherent;
 	}
 
-	public void setListeLivre(ArrayList<Livre> listeLivre) {
-		this.listeLivre = listeLivre;
+	public void setIdAdherent(long idAdherent) {
+		this.idAdherent = idAdherent;
 	}
 
-	public Livre getLivre(int indice){
-		return this.listeLivre.get(indice);
+	public int[] getIdLivre() {
+		return idLivre;
 	}
 
-	public Commande clone(){
-		return new Commande(this.id,this.classe,this.veuxUneCalculatrice,this.listeLivre);
-	}
-	
-	public double facture(){
-		double somme = 0;
-		for(int i=0; i<listeLivre.size(); i++){
-			somme += listeLivre.get(i).getPrix();
+	public void setIdLivre(int[] idLivre) {
+		for (int i = 0; i < idLivre.length; i++) {
+			this.idLivre[i] = idLivre[i];
 		}
-		return somme;
 	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Commande [idCommande=");
+		buffer.append(idCommande);
+		buffer.append(", dateCommande=");
+		buffer.append(dateCommande);
+		buffer.append(", prixCommande=");
+		buffer.append(prixCommande);
+		buffer.append(", idAdherent=");
+		buffer.append(idAdherent);
+//		buffer.append(", idLivre=");
+//		buffer.append(idLivre);
+		buffer.append("]");
+		return buffer.toString();
+	}
+
+	
+	
+	
+	
+	
 	
 
-	public String toString(){
-		StringBuffer s = new StringBuffer("Ceci est une commande pour un élève de classe de "+this.getClasse()+"et il désire la liste des livres suivants:");
-		s.append("/n");
-		for(int i=0; i<this.listeLivre.size(); i++){
-			s.append(this.listeLivre.get(i).toString());
-			s.append("/n");
-		}
-		
-		if(getVeuxUneCalculatrice()){
-		    s.append(" et il possède une calculatrice.");
-		}
-		else {
-			s.append("il ne possède pas de calculatrice , et il en désire une.");
-		}
-		
-		s.append("Le prix total de cette commande est de ");
-		s.append(this.facture());
-		return new String(s);
-		
-	}
+	
 	
 }
