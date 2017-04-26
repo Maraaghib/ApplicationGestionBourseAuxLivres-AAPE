@@ -37,7 +37,7 @@ public class Test {
 		livreDAO.createTable();
 
 
-		long idAdherent = 4;
+		long idAdherent = 2;
 
 		String prenom = "Mon Prénom";
 
@@ -124,7 +124,7 @@ public class Test {
 
 		/******************* RÉCUPÉRER UN ADHÉRENT VIA SON ID PUIS AFFICHER SES INFOS *******************/
 
-		//*
+		/*
 		Adherent adherent2 = adherentDAO.selectById(idAdherent);
 		System.out.println(adherent2.toString());
 		//*/
@@ -139,6 +139,19 @@ public class Test {
 		}
 		else{
 			System.out.println("La mise de l'adhérent a échoué !");
+		}
+		//*/
+
+
+		/******************* SUPPRESSION D'UN ADHERENT *******************/
+
+		//*
+		boolean test = adherentDAO.deleteById(adherent);
+		if(test) {
+			System.out.println("L'adhérent "+adherent.getPrenom()+" "+adherent.getNom()+" est bien supprimé !");
+		}
+		else{
+			System.out.println("La suppression de l'adhérent "+adherent.getPrenom()+" "+adherent.getNom()+" a échoué !");
 		}
 		//*/
 
