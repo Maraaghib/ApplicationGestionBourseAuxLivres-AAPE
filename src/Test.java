@@ -145,7 +145,7 @@ public class Test {
 
 		/******************* SUPPRESSION D'UN ADHERENT *******************/
 
-		//*
+		/*
 		boolean test = adherentDAO.deleteById(adherent);
 		if(test) {
 			System.out.println("L'adhérent "+adherent.getPrenom()+" "+adherent.getNom()+" est bien supprimé !");
@@ -174,6 +174,19 @@ public class Test {
 		/*
 		Commande commande2 = commandeDAO.selectById(idAdherent);
 		System.out.println(commande2.toString());
+		//*/
+
+
+		/******************* SUPPRESSION D'UNE COMMANDE *******************/
+
+		//*
+		boolean test = commandeDAO.deleteById(commande);
+		if(test) {
+			System.out.println("La commande est bien supprimée !");
+		}
+		else{
+			System.out.println("La suppression de la commande a échoué !");
+		}
 		//*/
 
 	}
