@@ -1,57 +1,8 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AdherentDAO extends DAO<Adherent> {
-	
-//	private long id;
-//	
-//	public boolean initId() {
-//		try{
-//			Statement stmt = connection.createStatement();
-//			
-//			String query = "CREATE TABLE IF NOT EXISTS identifiant " +
-//					   "(pk INTEGER PRIMARY KEY AUTOINCREMENT," +
-//					   " id INTEGER) "; // La table contenant les id des adh�rents initialis�e � YYYY0
-//			
-//			stmt.executeUpdate(query);
-//
-//			stmt.close();
-////			connection.close();
-//		} catch (Exception e) {
-//			System.err.println(e.getClass().getName() +  ": " + e.getMessage());
-//			System.exit(0);
-////			return false;
-//		}
-//		
-//		return true;
-//	}
-	
-	// Retourne un nouvel identifiant pour un adh�rent sous la forme YYYYX (o� YYYY est l'ann�e courante et X en entier qu'on incr�mente � chaquel nouvel adh�rent
-	public void newId() {
-//		ResultSet results;
-////		long id = -1;
-//		String query = "SELECT * FROM identifiant;";
-//		try {
-//			Statement stmt = connection.createStatement();
-//			results = stmt.executeQuery(query);
-//			
-//			if(results.next()) {
-//				this.id = results.getLong("id");
-//			}	
-//			
-//			results.close();
-//
-//		} catch (SQLException e) {
-//			 e.printStackTrace();
-////			return -1;
-//		}
-//		
-////		return id;
-	}
-	
-//	public long getId() {
-//		return this.id;
-//	}
 	
 	// Mettre � jour l'identifiant du dernier adh�rent 
 	public boolean updateId() {
@@ -300,5 +251,57 @@ public class AdherentDAO extends DAO<Adherent> {
 		
 		return adherent;
 	}
+	
+	public ArrayList<Adherent> selectAll() {
+		ArrayList<Adherent> listAdherents = new ArrayList<Adherent>();
+		ResultSet results;
+		String query = "SELECT * FROM adherent;";
+		try {
+			Statement stmt = connection.createStatement();
+			results = stmt.executeQuery(query);
+			
+			while(results.next()) {
+				Adherent adherent = new Adherent();
+				CommandeDAO commandeDAO = new CommandeDAO();
+				
+				adherent.setIdAdherent(results.getLong("idAdherent")); 
+				adherent.setPrenom(results.getString("prenom"));
+				adherent.setNom(results.getString("nom"));
+				adherent.setDateNaiss(results.getString("dateNaiss"));
+				adherent.setTelPerso(results.getString("telPerso"));
+				adherent.setMailPerso(results.getString("mailPerso"));
+				adherent.setClasse(results.getString("classe"));
+				adherent.setSpecialite(results.getString("specialite"));
+				adherent.setNomParaent(results.getString("nomParaent"));
+				adherent.setPrenomParent(results.getString("prenomParent"));
+				adherent.setRespLegal(results.getString("respLegal"));
+				adherent.setAdresse(results.getString("adresse"));
+				adherent.setCodePostal(results.getLong("codePostal"));
+				adherent.setVille(results.getString("ville"));
+				adherent.setTelParent(results.getString("telParent"));
+				adherent.setParticipation(results.getString("participation"));
+				adherent.setFormule(results.getString("formule"));
+				adherent.setAcompte(results.getDouble("acompte"));
+				adherent.setMontant(results.getDouble("montant"));
+				adherent.setTypeLivre(results.getString("typeLivre"));
+				adherent.setDateAdhesion(results.getString("dateAdhesion"));
+				
+				adherent.setCommande(commandeDAO.selectById(results.getLong("idAdherent"))); // Récupérer la commande concernant cet adhérant
+				
+				listAdherents.add(adherent);
+				
+			}	
+
+
+			results.close();
+
+		} catch (SQLException e) {
+			 e.printStackTrace();
+//			return null;
+		}
+		
+		return listAdherents;
+	}
+
 
 }
