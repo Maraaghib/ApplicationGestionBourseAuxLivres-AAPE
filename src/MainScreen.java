@@ -25,6 +25,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.awt.FlowLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.SpringLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
 
 public class MainScreen extends JFrame {
 	/**
@@ -34,44 +47,57 @@ public class MainScreen extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	public MainScreen() {
-		getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton btnNewButton = new JButton("Gestion des adh�rents");
+		
+		
+		JButton btnNewButton = new JButton("Ajout d'adhérents");
+		btnNewButton.setPreferredSize(new Dimension(300, 100));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println ("Test Gestion");
-				AdherentsGUI adh = new AdherentsGUI();
-		        adh.createAndShowGUI();
+				AddAdhGUI add = new AddAdhGUI();
 				
 			}
 		});
-		getContentPane().add(btnNewButton);
+		JButton btnNewButton_5 = new JButton("Ajout de livre");
+		btnNewButton_5.setPreferredSize(new Dimension(300, 100));
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddLivGUI add = new AddLivGUI();
+				
+			}
+		});
 		
-		JButton btnNewButton_1 = new JButton("Gestion du stock");
+		JButton btnNewButton_1 = new JButton("Affichage du stock");
+		btnNewButton_1.setPreferredSize(new Dimension(300, 100));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println ("Test Gestion");
 				StockGUI stock = new StockGUI();
-		        stock.createAndShowGUI();
 				
 			}
 		});
-		getContentPane().add(btnNewButton_1);
+
+		JButton btnNewButton_4 = new JButton("Affichage des adhérents");
+		btnNewButton_4.setPreferredSize(new Dimension(300, 100));
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdherentsGUI adh = new AdherentsGUI();
+				
+			}
+		});
 	
 		
 		JButton btnNewButton_2 = new JButton("Importer");
-		getContentPane().add(btnNewButton_2);
+		btnNewButton_2.setPreferredSize(new Dimension(300, 100));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println ("Test importer");
 				JFileChooser fc = new JFileChooser();
 				File dest = null;
 				try{
-				if(fc.showOpenDialog(btnNewButton_2) == JFileChooser.APPROVE_OPTION)
+				if(fc.showOpenDialog(btnNewButton_2) == JFileChooser.APPROVE_OPTION){
 					dest = fc.getSelectedFile();
 					Files.copy(dest.toPath(), source.toPath(),StandardCopyOption.REPLACE_EXISTING);
+				}
 				} catch (IOException e1) {
-					System.out.println ("Test importer");
 					e1.printStackTrace();
 				}
 			}
@@ -80,10 +106,17 @@ public class MainScreen extends JFrame {
 		
 		
 		JButton btnNewButton_3 = new JButton("Exporter");
+		btnNewButton_3.setPreferredSize(new Dimension(300, 100));
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		getContentPane().add(btnNewButton);
+		getContentPane().add(btnNewButton_5);
+		getContentPane().add(btnNewButton_4);
+		getContentPane().add(btnNewButton_1);
+		getContentPane().add(btnNewButton_2);
 		getContentPane().add(btnNewButton_3);
+
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println ("Test Exporter");
 				JFileChooser fc = new JFileChooser();
 				File dest = null;
 				try{
@@ -96,40 +129,14 @@ public class MainScreen extends JFrame {
 				}
 			}
 			
-		});
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnFichier = new JMenu("Fichier");
-		menuBar.add(mnFichier);
-		
-		JMenuItem mntmGestionDesAdhrents = new JMenuItem("Gestion des adhérents");
-		mnFichier.add(mntmGestionDesAdhrents);
-		
-		JMenuItem mntmGestionDuStock = new JMenuItem("Gestion du stock");
-		mnFichier.add(mntmGestionDuStock);
-		
-		JMenuItem mntmImprimer = new JMenuItem("Imprimer");
-		mnFichier.add(mntmImprimer);
-		mntmImprimer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			PrinterJob pj = PrinterJob.getPrinterJob();
-			    if (pj.printDialog()) {
-			        try {pj.print();}
-			        catch (PrinterException exc) {
-			            System.out.println(exc);
-		         }
-		     }
-			}
-		});
+		});	
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
         MainScreen gui = new MainScreen();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(500, 500);
+        gui.setPreferredSize(new Dimension(700, 400));
+        gui.setMinimumSize(new Dimension(700, 400));
         gui.setTitle("Bourse aux livres AAPE Gradignan");
         gui.setVisible(true);
 	}
