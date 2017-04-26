@@ -7,10 +7,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JTextField;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * AdherentsGUI is just like SimpleAdherentsGUI, except that it uses a custom
@@ -19,7 +22,42 @@ import java.awt.event.ActionListener;
 public class AddAdhGUI extends JPanel {
 
   public AddAdhGUI() {
-    String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+
+		AdherentDAO adherentDAO = new AdherentDAO();
+		CommandeDAO commandeDAO = new CommandeDAO();
+		LivreDAO livreDAO = new LivreDAO();
+	  ArrayList<Livre> listLivres = livreDAO.selectAll();
+	  String[] petStrings = new String[listLivres.size()];
+	  int listeLivre[] = new int[listLivres.size()];
+	  
+	for (int i = 0; i < listLivres.size(); i++) {
+		petStrings[i] = listLivres.get(i).getDesignation();
+		listeLivre[i] = (int) listLivres.get(i).getIdLivre();
+	}
+	
+	
+	// La date
+	 String[] month = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+	 String[] day = {"Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+	 
+	Calendar calendar = Calendar.getInstance();
+	 StringBuffer dateTimeTodayBuffer = new StringBuffer();
+	 dateTimeTodayBuffer.append(day[calendar.get(Calendar.DAY_OF_WEEK)]+" ");
+	 dateTimeTodayBuffer.append(calendar.get(Calendar.DAY_OF_MONTH)+" ");
+	 dateTimeTodayBuffer.append(month[calendar.get(Calendar.MONTH)]+" ");
+	 dateTimeTodayBuffer.append(calendar.get(Calendar.YEAR)+ " ");
+	 dateTimeTodayBuffer.append("à "+calendar.get(Calendar.HOUR_OF_DAY)+":");
+	 dateTimeTodayBuffer.append(calendar.get(Calendar.MINUTE)+":");
+	 dateTimeTodayBuffer.append(calendar.get(Calendar.SECOND));
+	 
+	 String dateTimeToday = dateTimeTodayBuffer.toString();
+	 
+	 
+		adherentDAO.createTable();
+		commandeDAO.createTable();
+		livreDAO.createTable();
+	  
+    
 
     JPanel panel = new JPanel();
     GridLayout gl = new GridLayout(12,12); // 4 rows, 2 columns
@@ -27,6 +65,10 @@ public class AddAdhGUI extends JPanel {
 
 
 
+  JLabel lbliD = new JLabel(" Numero d'adherent");
+  JTextField txtiD = new JTextField();
+  panel.add(lbliD);
+  panel.add(txtiD);
   JLabel lblNom = new JLabel(" Nom");
   JTextField txtNom = new JTextField();
   panel.add(lblNom);
@@ -55,6 +97,10 @@ public class AddAdhGUI extends JPanel {
   JTextField txtSpe = new JTextField();
   panel.add(lblSpé);
   panel.add(txtSpe);
+  JLabel lblEtat = new JLabel(" Etat des livres");
+  JTextField txtEtat = new JTextField();
+  panel.add(lblEtat);
+  panel.add(txtEtat);
   JLabel lblParent = new JLabel("  Nom Parent");
   JTextField txtParent = new JTextField();
   panel.add(lblParent);
@@ -117,7 +163,18 @@ public class AddAdhGUI extends JPanel {
 	});
   b2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
+			double prixCommande = 0;
+			
+			for (int i = 0; i < listeLivre.length; ++i) {
+			 	Livre livre = livreDAO.selectById(listeLivre[i]); // Récupérer le livre depuis la base de données
+			 	System.out.println(livre.toString());
+			 	prixCommande += livre.getPrix(); // Ajouter le prix de chaque livre sur le montant de la commande
+			 }
+			
 			 //String livre = (String) listeLivres.getSelectedItem();
+			 String idAdherentS = txtiD.getText();
+			 long idAdherent = Long.parseLong(idAdherentS);
 			 String prenom = txtPrenom.getText();
 			 String nom = txtNom.getText();
 			 String dateNaiss = txtDate.getText();
@@ -128,13 +185,25 @@ public class AddAdhGUI extends JPanel {
 			 String nomParaent = txtParent.getText();
 			 String prenomParent = txtPParent.getText();
 			 String respLegal = txtResp.getText();
+			 String typeLivre = txtEtat.getText(); 
 			 String adresse = txtAdresse.getText();
-			 String codePostal = txtCode.getText();
+			 String codePostalS = txtCode.getText();
+			 long codePostal = Long.parseLong(codePostalS);
 			 String ville = txtVille.getText();
 			 String telParent = txtTelP.getText();
 			 String participation = txtPart.getText();
 			 String formule = txtForm.getText();
-			 String acompte = txtAcc.getText();
+			 String acompteS = txtAcc.getText();
+			 double acompte = Double.parseDouble(acompteS);
+			 double montant = acompte;
+			 String dateAdhesion = dateTimeToday;
+			 
+			 Commande commande = new Commande(dateTimeToday, prixCommande, idAdherent, listeLivre); 
+			 
+			 Adherent adherent = new Adherent(idAdherent, prenom, nom, dateNaiss, telPerso, mailPerso, classe, specialite, nomParaent, prenomParent, respLegal, adresse, codePostal, ville, telParent, participation, formule, acompte, montant, commande, typeLivre, listeLivre, dateAdhesion);
+			 
+			 adherentDAO.insert(adherent);
+			 
 		}
 	});
 

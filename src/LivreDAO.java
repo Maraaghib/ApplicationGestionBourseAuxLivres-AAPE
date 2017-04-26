@@ -2,6 +2,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class LivreDAO extends DAO<Livre> {
 
@@ -132,6 +133,37 @@ public class LivreDAO extends DAO<Livre> {
 		}
 		
 		return livre;
+	}
+
+	public ArrayList<Livre> selectAll() {
+		
+		ArrayList<Livre> listLivres = new ArrayList<Livre>();
+		ResultSet results;
+		String query = "SELECT * FROM livre;";
+		try {
+			Statement stmt = connection.createStatement();
+			results = stmt.executeQuery(query);
+			
+			while(results.next()) {
+				Livre livre = new Livre();
+				livre.setIdLivre(results.getLong("idLivre")); // adherent.setIdAdherent(id);
+				livre.setDesignation(results.getString("designation"));
+				livre.setPrix(results.getDouble("prix"));
+				livre.setEtat(results.getInt("etat"));
+				livre.setReference(results.getInt("reference"));
+				livre.setEnStock(results.getByte("enStock"));
+				
+				listLivres.add(livre);
+			}	
+			
+			results.close();
+
+		} catch (SQLException e) {
+			 e.printStackTrace();
+//			return null;
+		}
+		
+		return listLivres;
 	}
 
 }
