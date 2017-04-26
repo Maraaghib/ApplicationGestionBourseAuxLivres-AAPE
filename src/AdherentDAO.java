@@ -126,7 +126,7 @@ public class AdherentDAO extends DAO<Adherent> {
 			PreparedStatement pstmt = connection.prepareStatement(query);
 			pstmt.setLong(1, adherent.getIdAdherent());
 
-			pstmt.executeUpdate(query);
+			pstmt.executeUpdate();
 			connection.commit();
 		} catch (SQLException e) {
 			 e.printStackTrace();
