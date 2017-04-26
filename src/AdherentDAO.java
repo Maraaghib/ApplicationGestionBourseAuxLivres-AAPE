@@ -11,7 +11,7 @@ public class AdherentDAO extends DAO<Adherent> {
 //			
 //			String query = "CREATE TABLE IF NOT EXISTS identifiant " +
 //					   "(pk INTEGER PRIMARY KEY AUTOINCREMENT," +
-//					   " id INTEGER) "; // La table contenant les id des adhérents initialisée à YYYY0
+//					   " id INTEGER) "; // La table contenant les id des adhï¿½rents initialisï¿½e ï¿½ YYYY0
 //			
 //			stmt.executeUpdate(query);
 //
@@ -26,7 +26,7 @@ public class AdherentDAO extends DAO<Adherent> {
 //		return true;
 //	}
 	
-	// Retourne un nouvel identifiant pour un adhérent sous la forme YYYYX (où YYYY est l'année courante et X en entier qu'on incrémente à chaquel nouvel adhérent
+	// Retourne un nouvel identifiant pour un adhï¿½rent sous la forme YYYYX (oï¿½ YYYY est l'annï¿½e courante et X en entier qu'on incrï¿½mente ï¿½ chaquel nouvel adhï¿½rent
 	public void newId() {
 //		ResultSet results;
 ////		long id = -1;
@@ -53,7 +53,7 @@ public class AdherentDAO extends DAO<Adherent> {
 //		return this.id;
 //	}
 	
-	// Mettre à jour l'identifiant du dernier adhérent 
+	// Mettre ï¿½ jour l'identifiant du dernier adhï¿½rent 
 	public boolean updateId() {
 	
 		String query = "UPDATE identifiant SET "+
@@ -156,13 +156,13 @@ public class AdherentDAO extends DAO<Adherent> {
 	   	
 //		ON ENREGISTRE UNIQUEMENT LES ID DES LIVRES DANS LA TABLES DES COMMANDES
 	   	
-		CommandeDAO comDAO = new CommandeDAO();
+		CommandeDAO commandeDAO = new CommandeDAO();
 //		for (int i = 0; i < adherent.getListeLivre().length; i++) {
-			comDAO.insert(adherent.getCommande(), adherent, adherent.getListeLivre());
+			commandeDAO.insert(adherent.getCommande());
 //		}
 		
 	   	
-	   	// Enregistrer en même la commande concernant l'adhérent
+	   	// Enregistrer en mï¿½me la commande concernant l'adhï¿½rent
 
 		return true;
 	}
@@ -247,12 +247,12 @@ public class AdherentDAO extends DAO<Adherent> {
 	}
 
 	@Override
-	public Adherent selectById(int id) {
-		// Essayer INNER JOIN pour récupérer les commandes. ??
+	public Adherent selectById(long id) {
+		// Essayer INNER JOIN pour rï¿½cupï¿½rer les commandes. ??
 		Adherent adherent = new Adherent();
-		CommandeDAO comDAO = new CommandeDAO();
+		CommandeDAO commandeDAO = new CommandeDAO();
 		ResultSet results;
-		String query = "SELECT * FROM adherent INNER JOIN commande ON adherent.idAdherent = "+id+";";
+		String query = "SELECT * FROM adherent WHERE idAdherent = "+id+";";
 		try {
 			Statement stmt = connection.createStatement();
 			results = stmt.executeQuery(query);
@@ -280,7 +280,7 @@ public class AdherentDAO extends DAO<Adherent> {
 				adherent.setTypeLivre(results.getString("typeLivre"));
 				adherent.setDateAdhesion(results.getString("dateAdhesion"));
 				
-				adherent.setCommande(comDAO.selectById(id));
+				adherent.setCommande(commandeDAO.selectById(id)); // RÃ©cupÃ©rer la commande concernant cet adhÃ©rant
 				
 			}	
 			
