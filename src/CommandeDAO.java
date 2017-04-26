@@ -75,7 +75,8 @@ public class CommandeDAO extends DAO<Commande> {
 		return true;
 	}
 
-	public boolean update(Commande commande, Adherent adherent, int[] idLivre) {
+	@Override
+	public boolean update(Commande commande) {
 	
 		String query = "UPDATE commande SET "+
 				"idLivre = ?, "+
@@ -83,11 +84,11 @@ public class CommandeDAO extends DAO<Commande> {
 				"prixCommande = ? "+
 				"WHERE idAdherent = ?";
 		try {
-			for (int i = 0; i < idLivre.length; i++) {
+			for (int i = 0; i < commande.getIdLivre().length; i++) {
 				PreparedStatement pstmt = connection.prepareStatement(query);
-				pstmt.setInt(1, idLivre[i]);
+				pstmt.setInt(1, commande.getIdLivre()[i]);
 				pstmt.setString(2, commande.getDateCommande());
-				pstmt.setDouble(3, adherent.getPrixCommande());
+				pstmt.setDouble(3, commande.getPrixCommande());
 			   	pstmt.setLong(4, commande.getIdAdherent());
 
 				pstmt.executeUpdate();
@@ -146,10 +147,5 @@ public class CommandeDAO extends DAO<Commande> {
 //		return false;
 //	}
 
-	@Override
-	public boolean update(Commande obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
