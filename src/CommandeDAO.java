@@ -2,6 +2,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public class CommandeDAO extends DAO<Commande> {
 
@@ -30,19 +31,20 @@ public class CommandeDAO extends DAO<Commande> {
 		return true;
 	}
 
-	public boolean insert(Commande commande, Adherent adherent, int[] idLivre) { // Prendre commande seule en arg
+	@Override
+	public boolean insert(Commande commande) { // Prendre commande seule en arg
 	
 		String query = "INSERT INTO commande (idAdherent, idLivre, dateCommande, prixCommande) "+
 				"VALUES (?,?,?,?)";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(query);
-			for (int i = 0; i < idLivre.length; i++) {
-				pstmt.setLong(1, adherent.getIdAdherent());
-				pstmt.setInt(2, idLivre[i]);
+			for (int i = 0; i < commande.getIdLivre().length; i++) {
+				pstmt.setLong(1, commande.getIdAdherent());
+				pstmt.setInt(2, commande.getIdLivre()[i]);
 				pstmt.setString(3, commande.getDateCommande());
-				pstmt.setDouble(4, adherent.getPrixCommande());
+				pstmt.setDouble(4, commande.getPrixCommande());
 			   	
-			   	// Enregistrer en même la commande concernant l'adhérent
+			   	// Enregistrer en mï¿½me la commande concernant l'adhï¿½rent
 
 				pstmt.executeUpdate();
 			}
@@ -73,7 +75,8 @@ public class CommandeDAO extends DAO<Commande> {
 		return true;
 	}
 
-	public boolean update(Commande commande, Adherent adherent, int[] idLivre) {
+	@Override
+	public boolean update(Commande commande) {
 	
 		String query = "UPDATE commande SET "+
 				"idLivre = ?, "+
@@ -81,11 +84,11 @@ public class CommandeDAO extends DAO<Commande> {
 				"prixCommande = ? "+
 				"WHERE idAdherent = ?";
 		try {
-			for (int i = 0; i < idLivre.length; i++) {
+			for (int i = 0; i < commande.getIdLivre().length; i++) {
 				PreparedStatement pstmt = connection.prepareStatement(query);
-				pstmt.setInt(1, idLivre[i]);
+				pstmt.setInt(1, commande.getIdLivre()[i]);
 				pstmt.setString(2, commande.getDateCommande());
-				pstmt.setDouble(3, adherent.getPrixCommande());
+				pstmt.setDouble(3, commande.getPrixCommande());
 			   	pstmt.setLong(4, commande.getIdAdherent());
 
 				pstmt.executeUpdate();
@@ -100,7 +103,7 @@ public class CommandeDAO extends DAO<Commande> {
 	}
 
 	@Override
-	public Commande selectById(int id) {
+	public Commande selectById(long id) {
 		Commande commande = new Commande();
 		CommandeDAO comDAO = new CommandeDAO();
 		ResultSet results;
@@ -120,9 +123,11 @@ public class CommandeDAO extends DAO<Commande> {
 				i++;
 			}	
 			
-			for (int j = 0; j < i; j++) {
-				tabLivres2[j] = tabLivres[j];
-			}
+			tabLivres2 = Arrays.copyOf(tabLivres, i);
+			
+//			for (int j = 0; j < i; j++) {
+//				tabLivres2[j] = tabLivres[j];
+//			}
 			
 			commande.setIdLivre(tabLivres2);
 			
@@ -136,16 +141,11 @@ public class CommandeDAO extends DAO<Commande> {
 		return commande;
 	}
 
-	@Override
-	public boolean insert(Commande commande) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	
+//	public boolean insert(Commande commande) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
-	@Override
-	public boolean update(Commande obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }

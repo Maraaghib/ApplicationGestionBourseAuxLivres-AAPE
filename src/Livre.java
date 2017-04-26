@@ -2,7 +2,7 @@
 
 public class Livre {
 	
-	private int idLivre;
+	private long idLivre;
 	private String designation;
 	private double prix;
 	private int etat;
@@ -14,7 +14,7 @@ public class Livre {
 		
 	}
 
-	public Livre(int idLivre, String designation, double prix, int etat, int reference, byte enStock) {
+	public Livre(long idLivre, String designation, double prix, int etat, int reference, byte enStock) {
 		this.idLivre = idLivre;
 		this.designation = designation;
 		this.prix = prix;
@@ -23,12 +23,12 @@ public class Livre {
 		this.enStock = enStock;
 	}
 
-	public int getIdLivre() {
+	public long getIdLivre() {
 		return idLivre;
 	}
 
-	public void setIdLivre(int idLivre) {
-		this.idLivre = idLivre;
+	public void setIdLivre(long id) {
+		this.idLivre = id;
 	}
 
 	public String getDesignation() {

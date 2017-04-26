@@ -9,38 +9,38 @@ public abstract class DAO<T> {
 	}
 	
 	/**
-	* Méthode de création d'une table
+	* Mï¿½thode de crï¿½ation d'une table
 	* @param obj
 	* @return boolean 
 	*/
 	public abstract boolean createTable();
 	
 	/**
-	* Méthode d'insertion dans une table
+	* Mï¿½thode d'insertion dans une table
 	* @param obj
 	* @return boolean 
 	*/
 	public abstract boolean insert(T obj);
 	
 	/**
-	* Méthode pour effacer un enregistrement via son ID
+	* Mï¿½thode pour effacer un enregistrement via son ID
 	* @param obj
 	* @return boolean 
 	*/
 	public abstract boolean deleteById(T obj);
 	
 	/**
-	* Méthode de mise à jour
+	* Mï¿½thode de mise ï¿½ jour
 	* @param obj
 	* @return boolean
 	*/
 	public abstract boolean update(T obj);
 	
 	/**
-	* Méthode de recherche des informations
+	* Mï¿½thode de recherche des informations
 	* @param id
 	* @return T
 	*/
-	public abstract T selectById(int id);
+	public abstract T selectById(long id);
 	
 }

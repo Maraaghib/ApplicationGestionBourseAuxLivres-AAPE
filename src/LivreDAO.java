@@ -45,7 +45,7 @@ public class LivreDAO extends DAO<Livre> {
 			pstmt.setLong(5, livre.getReference());
 			pstmt.setByte(6, livre.isEnStock());
 		   	
-		   	// Enregistrer en même la commande concernant l'adhérent
+		   	// Enregistrer en mï¿½me la commande concernant l'adhï¿½rent
 
 			pstmt.executeUpdate();
 			connection.commit();
@@ -107,7 +107,7 @@ public class LivreDAO extends DAO<Livre> {
 	}
 
 	@Override
-	public Livre selectById(int id) {
+	public Livre selectById(long id) {
 		Livre livre = new Livre();
 		ResultSet results;
 		String query = "SELECT * FROM livre WHERE idLivre = "+id+";";

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Commande {
 	private long idCommande;
@@ -35,6 +36,10 @@ public class Commande {
 		this.dateCommande = dateCommande;
 	}
 
+	public double getPrixCommande() {
+		return prixCommande;
+	}
+
 	public void setPrixCommande(double prixCommande) {
 		this.prixCommande = prixCommande;
 	}
@@ -52,9 +57,12 @@ public class Commande {
 	}
 
 	public void setIdLivre(int[] idLivre) {
-		for (int i = 0; i < idLivre.length; i++) {
-			this.idLivre[i] = idLivre[i];
-		}
+		this.idLivre = Arrays.copyOf(idLivre, idLivre.length);
+//		for (int i = 0; i < idLivre.length; i++) {
+//			this.idLivre[i] = idLivre[i];
+//		} i = 0; i < idLivre.length; i++) {
+//		this.idLivre[i] = idLivre[i];
+//	}
 	}
 
 	@Override
@@ -68,6 +76,11 @@ public class Commande {
 		buffer.append(prixCommande);
 		buffer.append(", idAdherent=");
 		buffer.append(idAdherent);
+		buffer.append(", Livres=");
+		LivreDAO livreDAO = new LivreDAO();
+		for (int i = 0; i < idLivre.length; i++) {
+			buffer.append(livreDAO.selectById(getIdLivre()[i]).toString());
+		}
 //		buffer.append(", idLivre=");
 //		buffer.append(idLivre);
 		buffer.append("]");

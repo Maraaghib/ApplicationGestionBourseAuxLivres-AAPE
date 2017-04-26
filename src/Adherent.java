@@ -12,18 +12,18 @@ public class Adherent {
 	private String specialite;
 	private String nomParaent;
 	private String prenomParent;
-	private String respLegal; // Responsable légal: Père || Mère || Autre (à préciser)
+	private String respLegal; // Responsable lï¿½gal: Pï¿½re || Mï¿½re || Autre (ï¿½ prï¿½ciser)
 	private String adresse;
 	private long codePostal;
 	private String ville;
 	private String telParent;
-	private String participation; // Au conseil de classe || à la bourse aux libres || au conseil d'administration
-	private String formule; // formule "de base" à 15€ || formule "soutien" à 25€ || formule "bienfaiteur" à 39€
+	private String participation; // Au conseil de classe || ï¿½ la bourse aux libres || au conseil d'administration
+	private String formule; // formule "de base" ï¿½ 15ï¿½ || formule "soutien" ï¿½ 25ï¿½ || formule "bienfaiteur" ï¿½ 39ï¿½
 	private double acompte; // (Si pas de reprise pour ectte commande)
 	private double montant;
 	private Commande commande;
-	private String typeLivre; // Neuf || Excellent état type 2 || Etat moyen type 3 || Etat passable 4 || Etat très passable 5
-	private int [] listeLivre; // Pourquoi pas ne pâs stocker que les ID des livres. De ce fait, pour afficher les livres, on fait livreDAO.selectById(idLivre[i])
+	private String typeLivre; // Neuf || Excellent ï¿½tat type 2 || Etat moyen type 3 || Etat passable 4 || Etat trï¿½s passable 5
+	private int [] listeLivre; // Pourquoi pas ne pï¿½s stocker que les ID des livres. De ce fait, pour afficher les livres, on fait livreDAO.selectById(idLivre[i])
 	private String dateAdhesion;
 
 	/**Constructors**/
@@ -311,12 +311,12 @@ public class Adherent {
 		buffer.append(commande.toString());
 		buffer.append(", typeLivre=");
 		buffer.append(typeLivre);
-		buffer.append(", listeLivre=");
-		LivreDAO livreDAO = new LivreDAO();
-		for (int i = 0; i < listeLivre.length; i++) {
-			buffer.append(livreDAO.selectById(listeLivre[i]).toString());
-		}
-		buffer.append(listeLivre);
+//		buffer.append(", listeLivre=");
+//		LivreDAO livreDAO = new LivreDAO();
+//		for (int i = 0; i < listeLivre.length; i++) {
+//			buffer.append(livreDAO.selectById(listeLivre[i]).toString());
+//		}
+//		buffer.append(listeLivre);
 		buffer.append(", dateAdhesion=");
 		buffer.append(dateAdhesion);
 		buffer.append("]");
