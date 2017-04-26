@@ -65,7 +65,7 @@ public class CommandeDAO extends DAO<Commande> {
 			PreparedStatement pstmt = connection.prepareStatement(query);
 			pstmt.setLong(1, commande.getIdAdherent());
 
-			pstmt.executeUpdate(query);
+			pstmt.executeUpdate();
 			connection.commit();
 		} catch (SQLException e) {
 			 e.printStackTrace();
