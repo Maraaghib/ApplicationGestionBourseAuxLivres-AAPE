@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class Test {
 
 
 
-		String[] month = {"Janvier", "FÃ©vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "AoÃ»t", "Septembre", "Octobre", "Novembre", "DÃ©cembre"};
+		String[] month = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aoû»t", "Septembre", "Octobre", "Novembre", "Décembre"};
 		String[] day = {"Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
 
 
@@ -23,7 +24,7 @@ public class Test {
 		dateTimeTodayBuffer.append(calendar.get(Calendar.DAY_OF_MONTH)+" ");
 		dateTimeTodayBuffer.append(month[calendar.get(Calendar.MONTH)]+" ");
 		dateTimeTodayBuffer.append(calendar.get(Calendar.YEAR)+ " ");
-		dateTimeTodayBuffer.append("Ã  "+calendar.get(Calendar.HOUR_OF_DAY)+":");
+		dateTimeTodayBuffer.append("à  "+calendar.get(Calendar.HOUR_OF_DAY)+":");
 		dateTimeTodayBuffer.append(calendar.get(Calendar.MINUTE)+":");
 		dateTimeTodayBuffer.append(calendar.get(Calendar.SECOND));
 
@@ -37,9 +38,9 @@ public class Test {
 		livreDAO.createTable();
 
 
-		long idAdherent = 2;
+		long idAdherent = 2018;
 
-		String prenom = "Mon PrÃ©nom";
+		String prenom = "Mon Prénom";
 
 		String nom = "Mon nom";
 
@@ -47,7 +48,7 @@ public class Test {
 
 		String telPerso = "0123456789";
 
-		String mailPerso = "adresse@mail.sn";
+		String mailPerso = "adresse@outlook.fr";
 
 		String classe = "Licence";
 
@@ -55,11 +56,11 @@ public class Test {
 
 		String nomParaent = "Son nom";
 
-		String prenomParent = "Son PrÃ©onm";
+		String prenomParent = "Son Préonm";
 
 		String respLegal = "Mon responsable";
 
-		String adresse = "27 rue Nom-de-la-rue";
+		String adresse = "27 rue François Mitterand";
 
 		long codePostal = 33000;
 
@@ -77,27 +78,27 @@ public class Test {
 
 		String typeLivre = "Neuf";
 
-		int listeLivre[] = {0, 1, 2, 3, 5};
+		int listeLivre[] = {0, 1, 2, 3, 5, 10, 11};
 
 
-		/****************** STOCKER DES LIVRES DANS LA BASE DE DONNÃ‰ES *******************/
+		/****************** STOCKER DES LIVRES DANS LA BASE DE DONNEES *******************/
 
 		/*
-		int listeLivre1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}; // Les livres Ã  ajouter dans le stock
-		for (int i = 0; i < listeLivre.length; i++) {
-			Livre livre = new Livre(listeLivre[i], "designation"+i, (i*100), i+1, i*73, (byte)1);
+		int listeLivre1[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}; // Les id des livres à  ajouter dans le stock
+		for (int i = 0; i < listeLivre1.length; i++) {
+			Livre livre = new Livre(listeLivre1[i], "designation"+i, (i*100), i+1, i*73, (byte)1);
 			// livre.toString();
 			livreDAO.insert(livre);
 		}
 		//*/
 
-		/******************* RÃ‰CUPÃ‰RER DES LIVERS DEPUIS LA BASE DE DONNÃ‰ES VIA LEURS ID ET LES AFFICHER *******************/
+		/******************* RECUPERER DES LIVERS DEPUIS LA BASE DE DONNEES VIA LEURS ID ET LES AFFICHER *******************/
 
 		/*
-		int listeLivre2[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}; // Les livres Ã  ajouter dans le stock
+		int listeLivre2[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}; // Les livres à  ajouter dans le stock
 
-		for (int i = 0; i < listeLivre.length; ++i) {
-			Livre livre = livreDAO.selectById(listeLivre[i]); // RÃ©cupÃ©rer le livre depuis la base de donnÃ©es
+		for (int i = 0; i < listeLivre2.length; ++i) {
+			Livre livre = livreDAO.selectById(listeLivre2[i]); // Récupérer le livre depuis la base de données
 			System.out.println(livre.toString());
 			prixCommande += livre.getPrix(); // Calculer le prix de la commande
 		}
@@ -109,20 +110,34 @@ public class Test {
 		Adherent adherent = new Adherent(idAdherent, prenom, nom, dateNaiss, telPerso, mailPerso, classe, specialite, nomParaent, prenomParent, respLegal, adresse, codePostal, ville, telParent, participation, formule, acompte, montant, commande, typeLivre, listeLivre, dateAdhesion);
 
 
-		/******************* ENREGISTREMENT D'UN NOUVEL ADHÃ‰RENT *******************/
+		/******************* ENREGISTREMENT D'UN NOUVEL ADHERENT *******************/
 
 		/*
 		boolean test = adherentDAO.insert(adherent);
 		if(test) {
-			System.out.println("Enregistrement effectuÃ© avec succÃ¨s !");
+			System.out.println("Enregistrement effectué avec succès !");
 		}
 		else{
-			System.out.println("L'enregistrement a Ã©chouÃ© !");
+			System.out.println("L'enregistrement a échoué !");
 		}
 		//*/
 
+		
+		/******************* AFFICHER  TOUS LES ADHERENTS ET LEURS INFOS *******************/
 
-		/******************* RÃ‰CUPÃ‰RER UN ADHÃ‰RENT VIA SON ID PUIS AFFICHER SES INFOS *******************/
+		//*
+		ArrayList<Adherent> listeAdherent = new ArrayList<Adherent>();
+		listeAdherent = adherentDAO.selectAll();
+		for (int i = 0; i < listeAdherent.size(); i++) {
+			Adherent adherent2 = listeAdherent.get(i);
+			System.out.println(adherent2.toString());
+			System.out.println();
+		}
+		
+		
+		//*/
+		
+		/******************* RECUPERER UN ADHERENT VIA SON ID PUIS AFFICHER SES INFOS *******************/
 
 		/*
 		Adherent adherent2 = adherentDAO.selectById(idAdherent);
@@ -130,15 +145,15 @@ public class Test {
 		//*/
 
 
-		/******************* MISE Ã€ JOUR DES INFOS D'UN ADHERENT DÃ‰JÃ€ ENREGISTRÃ‰ *******************/
+		/******************* MISE A JOUR DES INFOS D'UN ADHERENT DEJA ENREGISTRE *******************/
 
 		/*
 		boolean test = adherentDAO.update(adherent);
 		if(test) {
-			System.out.println("Les informations de l'adhÃ©rents ont Ã©tÃ© bien mises Ã  jour !");
+			System.out.println("Les informations de l'adhérents ont été bien mises à  jour !");
 		}
 		else{
-			System.out.println("La mise de l'adhÃ©rent a Ã©chouÃ© !");
+			System.out.println("La mise de l'adhérent a échoué !");
 		}
 		//*/
 
@@ -148,28 +163,28 @@ public class Test {
 		/*
 		boolean test = adherentDAO.deleteById(adherent);
 		if(test) {
-			System.out.println("L'adhÃ©rent "+adherent.getPrenom()+" "+adherent.getNom()+" est bien supprimÃ© !");
+			System.out.println("L'adhérent "+adherent.getPrenom()+" "+adherent.getNom()+" est bien supprimé !");
 		}
 		else{
-			System.out.println("La suppression de l'adhÃ©rent "+adherent.getPrenom()+" "+adherent.getNom()+" a Ã©chouÃ© !");
+			System.out.println("La suppression de l'adhérent "+adherent.getPrenom()+" "+adherent.getNom()+" a échoué !");
 		}
 		//*/
 
 
-		/******************* MISE Ã€ JOUR D'UNE COMMANDE DÃ‰JÃ€ ENREGISTRÃ‰E *******************/
+		/******************* MISE à JOUR D'UNE COMMANDE DEJA ENREGISTREE *******************/
 
 		/*
 		boolean test = commandeDAO.update(commande);
 		if(test) {
-			System.out.println("La commande a bien Ã©tÃ© mise Ã  jour !");
+			System.out.println("La commande a bien été mise à  jour !");
 		}
 		else{
-			System.out.println("La mise Ã  jour de la commande a Ã©chouÃ© !");
+			System.out.println("La mise à  jour de la commande a échoué !");
 		}
 		//*/
 
 
-		/******************* RÃ‰CUPÃ‰RER UNE COMMANDE VIA SON ID PUIS AFFICHER *******************/
+		/******************* RECUPERER UNE COMMANDE VIA SON ID PUIS AFFICHER *******************/
 
 		/*
 		Commande commande2 = commandeDAO.selectById(idAdherent);
@@ -179,13 +194,13 @@ public class Test {
 
 		/******************* SUPPRESSION D'UNE COMMANDE *******************/
 
-		//*
+		/*
 		boolean test = commandeDAO.deleteById(commande);
 		if(test) {
-			System.out.println("La commande est bien supprimÃ©e !");
+			System.out.println("La commande est bien supprimée !");
 		}
 		else{
-			System.out.println("La suppression de la commande a Ã©chouÃ© !");
+			System.out.println("La suppression de la commande a échoué !");
 		}
 		//*/
 
